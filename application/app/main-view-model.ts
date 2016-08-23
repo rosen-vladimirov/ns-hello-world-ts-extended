@@ -1,8 +1,8 @@
 import observable = require("data/observable");
+import * as _ from "lodash";
 
 export class HelloWorldModel extends observable.Observable {
 
-    private _counter: number;
     private _message: string;
 
     get message(): string {
@@ -17,22 +17,14 @@ export class HelloWorldModel extends observable.Observable {
 
     constructor() {
         super();
-
-        // Initialize default values.
-        this._counter = 42;
         this.updateMessage();
     }
 
     private updateMessage() {
-        if (this._counter <= 0) {
-            this.message = "Hoorraaay! You unlocked the NativeScript clicker achievement!";
-        } else {
-            this.message = this._counter + " taps left";
-        }
+        this.message = _.random(0, 100, true).toString();
     }
 
     public onTap() {
-        this._counter--;
         this.updateMessage();
     }
 }
